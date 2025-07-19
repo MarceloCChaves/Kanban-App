@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+:root {
+  --white: #FAF7F0;
+  --light-gray: #D8D2C2;
+  --dark-gray: #4A4947;
+  --light-brown: #B17457;
+  --light-red: #FFB4B4;
+  --red: #E14434;
+  --yellow: #EAA64D;
+  --light-yellow: #FADA7A;
+  --green: #2D4F2B;
+  --light-green: #708A58;
+  --light-blue: #438ac9;
+  --blue: #113F67;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover, button:hover {
+  filter: brightness(90%);
+}
+
+button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
