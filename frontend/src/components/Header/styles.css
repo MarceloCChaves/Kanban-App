@@ -1,0 +1,17 @@
+.header-container {
+  background: var(--dark-gray);
+  padding: 1.25rem;
+}
+
+.header-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.header-button a {
+  background: var(--blue);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border-radius: .5rem;
+}
