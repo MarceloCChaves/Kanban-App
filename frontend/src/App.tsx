@@ -1,7 +1,14 @@
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import CreateTask from './pages/createTask';
+
 const App = () => {
   return (
     <>
-      <h1>Hello world!</h1>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/create-task" element={<CreateTask />} />
+      </Routes>
     </>
   )
 }
