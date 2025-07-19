@@ -4,9 +4,21 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 export declare class TasksController {
     private readonly tasksService;
     constructor(tasksService: TasksService);
-    create(createTaskDto: CreateTaskDto): string;
-    findAll(): string;
-    findOne(id: string): string;
-    update(id: string, updateTaskDto: UpdateTaskDto): string;
-    remove(id: string): string;
+    create(createTaskDto: CreateTaskDto): Promise<{
+        title: string;
+        status: import(".prisma/client").$Enums.TaskStatus;
+        id: number;
+    }>;
+    findAll(): Promise<{
+        title: string;
+        status: import(".prisma/client").$Enums.TaskStatus;
+        id: number;
+    }[]>;
+    findOne(id: string): Promise<{
+        title: string;
+        status: import(".prisma/client").$Enums.TaskStatus;
+        id: number;
+    }>;
+    update(id: string, updateTaskDto: UpdateTaskDto): Promise<string>;
+    remove(id: string): Promise<string>;
 }

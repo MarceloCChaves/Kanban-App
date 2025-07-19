@@ -1,26 +1,63 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { PrismaService } from 'src/database/prisma.service';
 
 @Injectable()
 export class TasksService {
-  create(createTaskDto: CreateTaskDto) {
-    return 'This action adds a new task';
+  constructor(private readonly prisma: PrismaService){}
+
+  async create(createTaskDto: CreateTaskDto) {
+    const newTask = {
+      title: createTaskDto.title,
+      status: createTaskDto.status,
+    }
+
+    return await this.prisma.task.create({
+      data: newTask,
+    })
   }
 
-  findAll() {
-    return `This action returns all tasks`;
+  async findAll() {
+    return await this.prisma.task.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} task`;
+  async findOne(id: number) {
+    const findTask = await this.prisma.task.findFirst({
+      where: {
+        id
+      }
+    });
+
+    if(!findTask){
+      throw new NotFoundException("Carro não encontrado")
+    }
+
+    return findTask;
   }
 
-  update(id: number, updateTaskDto: UpdateTaskDto) {
-    return `This action updates a #${id} task`;
+  async update(id: number, updateTaskDto: UpdateTaskDto) {
+    await this.findOne(id);
+
+    await this.prisma.task.update({
+      where: {
+        id
+      },
+      data: updateTaskDto
+    })
+
+    return `Task ${id} has updated successfully`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} task`;
+  async remove(id: number) {
+    await this.findOne(id);
+
+    await this.prisma.task.delete({
+      where: {
+        id
+      },
+    })
+    
+    return `Task ${id} has deleted successfully`;
   }
 }

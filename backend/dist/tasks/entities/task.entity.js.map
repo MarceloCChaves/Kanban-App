@@ -1,1 +1,1 @@
-{"version":3,"file":"task.entity.js","sourceRoot":"","sources":["../../../src/tasks/entities/task.entity.ts"],"names":[],"mappings":";;;AAAA,MAAa,IAAI;CAAG;AAApB,oBAAoB"}
+{"version":3,"file":"task.entity.js","sourceRoot":"","sources":["../../../src/tasks/entities/task.entity.ts"],"names":[],"mappings":";;;AAAA,IAAY,UAKX;AALD,WAAY,UAAU;IACpB,iCAAmB,CAAA;IACnB,yCAA2B,CAAA;IAC3B,iCAAmB,CAAA;IACnB,2BAAa,CAAA;AACf,CAAC,EALW,UAAU,0BAAV,UAAU,QAKrB;AACD,MAAa,IAAI;IACf,EAAE,CAAS;IACX,KAAK,CAAS;IACd,MAAM,CAAa;CACpB;AAJD,oBAIC"}
