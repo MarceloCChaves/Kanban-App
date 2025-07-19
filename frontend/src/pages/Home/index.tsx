@@ -1,6 +1,14 @@
+import Column from "../../components/Column";
+import "./styles.css";
+
 const Home = () => {
   return(
-    <h1>Mundo</h1>
+    <section className="home-container">
+      <Column title="A Fazer" number_tasks={3} />
+      <Column title="Em Progresso" number_tasks={2} />
+      <Column title="Testando" number_tasks={3} />
+      <Column title="Concluído" number_tasks={5} />
+    </section>
   )
 }
 
