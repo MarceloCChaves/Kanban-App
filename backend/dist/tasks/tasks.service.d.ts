@@ -7,16 +7,19 @@ export declare class TasksService {
     create(createTaskDto: CreateTaskDto): Promise<{
         title: string;
         status: import(".prisma/client").$Enums.TaskStatus;
+        description: string | null;
         id: number;
     }>;
     findAll(): Promise<{
         title: string;
         status: import(".prisma/client").$Enums.TaskStatus;
+        description: string | null;
         id: number;
     }[]>;
     findOne(id: number): Promise<{
         title: string;
         status: import(".prisma/client").$Enums.TaskStatus;
+        description: string | null;
         id: number;
     }>;
     update(id: number, updateTaskDto: UpdateTaskDto): Promise<string>;
