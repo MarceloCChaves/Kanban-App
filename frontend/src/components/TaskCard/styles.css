@@ -17,6 +17,10 @@
   font-weight: 700;
 }
 
+.card-options {
+  display: flex;
+}
+
 .card-button {
   padding: .5rem;
   background: inherit;
