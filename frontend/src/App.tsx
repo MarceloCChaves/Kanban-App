@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import CreateTask from './pages/createTask';
+import EditTask from './pages/editTask';
 import Header from './components/Header';
 import Modal from 'react-modal';
 
@@ -13,6 +14,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/create-task" element={<CreateTask />} />
+        <Route path="/edit-task/:id" element={<EditTask />} />
       </Routes>
     </>
   )

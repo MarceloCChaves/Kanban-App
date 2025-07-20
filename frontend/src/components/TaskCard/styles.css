@@ -19,6 +19,7 @@
 
 .card-options {
   display: flex;
+  align-items: center;
 }
 
 .card-button {
