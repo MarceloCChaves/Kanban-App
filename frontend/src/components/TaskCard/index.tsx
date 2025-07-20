@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { ITasks } from "../../interfaces/ITasks";
 import "./styles.css";
-import { FaPencilAlt, FaTrash } from "react-icons/fa";
+import { FaEye, FaPencilAlt, FaTrash } from "react-icons/fa";
 import ModalComponent from "../Modal";
 import { Link } from "react-router-dom";
 
@@ -24,16 +24,19 @@ const TaskCard = ({ id, title, status, deleteTask }: ITasks) => {
     <>
       <div className="task-card">
         <div className="card-info">
-          <h3>{title}</h3>
+          <h3 className="card-title">{title}</h3>
           <p className={`card-status ${classNameStatus[status]}`}>{status}</p>
-        </div>
-        <div className="card-options">
-          <Link to={`/edit-task/${id}`}>
-            <FaPencilAlt size={15} color="#2D4F2B" />
-          </Link>
-          <button className="card-button" onClick={() => setIsModalOpen(true)}>
-            <FaTrash size={15} color="#E14434" />
-          </button>
+          <div className="card-options">
+            <Link to={`/task/${id}`}>
+              <FaEye size={15} color="##438ac9" />
+            </Link>
+            <Link to={`/edit-task/${id}`}>
+              <FaPencilAlt size={15} color="#2D4F2B" />
+            </Link>
+            <button className="card-button" onClick={() => setIsModalOpen(true)}>
+              <FaTrash size={15} color="#E14434" />
+            </button>
+          </div>
         </div>
       </div>
 

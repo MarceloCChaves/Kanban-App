@@ -9,6 +9,10 @@
   justify-content: space-between;
 }
 
+.card-title {
+  margin-bottom: .5rem;
+}
+
 .card-status{
   display: inline;
   padding: .25rem;
@@ -18,8 +22,7 @@
 }
 
 .card-options {
-  display: flex;
-  align-items: center;
+  margin-top: 1rem;
 }
 
 .card-button {
