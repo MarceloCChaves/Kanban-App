@@ -38,6 +38,14 @@
   background: var(--white);
 }
 
+.task-description {
+  margin: 2rem 0;
+  padding: 1rem;
+  border-radius: .5rem;
+  border: none;
+  background: var(--light-gray);
+}
+
 .task-options {
   margin-top: 1rem;
 

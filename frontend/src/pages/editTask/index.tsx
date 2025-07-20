@@ -9,6 +9,7 @@ const EditTask = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
   const params = useParams();
 
@@ -18,6 +19,7 @@ const EditTask = () => {
         const res = await api.get(`/tasks/${params.id}`);
         setTitle(res.data.title);
         setStatus(res.data.status);
+        setDescription(res.data.description);
       } catch (error) {
         console.error(error);
       }
@@ -32,6 +34,7 @@ const EditTask = () => {
       await api.patch(`/tasks/${params.id}`, {
         title,
         status,
+        description,
       });
       navigate("/");
     } catch (error) {
@@ -59,6 +62,10 @@ const EditTask = () => {
               <option value="testing">Testando</option>
               <option value="done">Concluído</option>
             </select>
+          </div>
+          <div className="form-task">
+            <label>Descrição</label>
+            <textarea className="form-input" rows={7} placeholder="Digite o título da tarefa" value={description} onChange={(e) => setDescription(e.target.value)} />
           </div>
           <div className="form-actions">
             <button className="form-create" type="button" onClick={() => setIsModalOpen(!isModalOpen)}>Editar tarefa</button>

@@ -7,6 +7,7 @@ import { api } from "../../api/api";
 const CreateTask = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [status, setStatus] = useState("pending");
 
   const submitForm = async (e: FormEvent) => {
@@ -16,6 +17,7 @@ const CreateTask = () => {
       await api.post("/tasks", {
         title,
         status,
+        description
       });
       navigate("/");
     } catch (error) {
@@ -43,6 +45,10 @@ const CreateTask = () => {
               <option value="testing">Testando</option>
               <option value="done">Concluído</option>
             </select>
+          </div>
+          <div className="form-task">
+            <label>Descrição</label>
+            <textarea className="form-input" rows={7} placeholder="Digite o título da tarefa" onChange={(e) => setDescription(e.target.value)} />
           </div>
           <div className="form-actions">
             <button className="form-create" type="submit">Criar tarefa</button>

@@ -42,6 +42,10 @@ const Task = () => {
         </header>
         <main className="task-main">
           <p>Status: {task?.status}</p>
+          {task?.description ? 
+          <div className="task-description">
+            <p>{task?.description}</p>
+          </div> : <></>}
           <div className="task-options">
             <Link className="btn-confirm" to={`/edit-task/${params.id}`}>Editar tarefa</Link>
             <button className="btn-cancel" onClick={() => setIsModalOpen(!isModalOpen)}>Deletar tarefa</button>
