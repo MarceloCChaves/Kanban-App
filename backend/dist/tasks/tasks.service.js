@@ -28,13 +28,16 @@ let TasksService = class TasksService {
         });
     }
     async findAll() {
-        return await this.prisma.task.findMany();
+        return await this.prisma.task.findMany({
+            include: { comments: true },
+        });
     }
     async findOne(id) {
         const findTask = await this.prisma.task.findFirst({
             where: {
                 id
-            }
+            },
+            include: { comments: true },
         });
         if (!findTask) {
             throw new common_1.NotFoundException("Tarefa não encontrada");

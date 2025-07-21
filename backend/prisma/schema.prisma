@@ -18,8 +18,19 @@ model Task {
   title  String
   status TaskStatus
   description String?
+  comments    Comment[]
 
   @@map("tasks")
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  taskId    Int
+
+  @@map("comments")
 }
 
 enum TaskStatus {

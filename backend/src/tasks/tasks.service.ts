@@ -20,14 +20,17 @@ export class TasksService {
   }
 
   async findAll() {
-    return await this.prisma.task.findMany();
+    return await this.prisma.task.findMany({
+      include: { comments: true },
+    });
   }
 
   async findOne(id: number) {
     const findTask = await this.prisma.task.findFirst({
       where: {
         id
-      }
+      },
+      include: { comments: true },
     });
 
     if(!findTask){

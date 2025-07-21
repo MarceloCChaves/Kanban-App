@@ -10,13 +10,27 @@ export declare class TasksService {
         status: import(".prisma/client").$Enums.TaskStatus;
         description: string | null;
     }>;
-    findAll(): Promise<{
+    findAll(): Promise<({
+        comments: {
+            id: number;
+            content: string;
+            createdAt: Date;
+            taskId: number;
+        }[];
+    } & {
         id: number;
         title: string;
         status: import(".prisma/client").$Enums.TaskStatus;
         description: string | null;
-    }[]>;
+    })[]>;
     findOne(id: number): Promise<{
+        comments: {
+            id: number;
+            content: string;
+            createdAt: Date;
+            taskId: number;
+        }[];
+    } & {
         id: number;
         title: string;
         status: import(".prisma/client").$Enums.TaskStatus;
