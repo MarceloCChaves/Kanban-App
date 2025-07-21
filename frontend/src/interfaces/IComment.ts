@@ -3,4 +3,5 @@ export interface IComment {
   content: string;
   createdAt: Date;
   taskId: number;
+  deleteComment: (value: number) => void;
 }

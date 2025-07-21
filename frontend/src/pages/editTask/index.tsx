@@ -47,7 +47,7 @@ const EditTask = () => {
       <div className="form-content">
         <header className="form-header">
           <h3 className="form-title">Editar tarefa</h3>
-          <Link className="form-back" to="/">Voltar <FaArrowCircleLeft /></Link>
+          <Link className="form-back" to={`/task/${params.id}`}>Voltar <FaArrowCircleLeft /></Link>
         </header>
         <main className="form-main">
           <div className="form-task">

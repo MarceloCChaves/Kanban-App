@@ -11,7 +11,9 @@ const Task = () => {
   const [task, setTask] = useState<ITask | null>(null);
   const params = useParams();
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModaldeleteTaskOpen, setIsModaldeleteTaskOpen] = useState(false);
+  const [isModaldeleteCommentOpen, setIsModaldeleteCommentOpen] = useState(false);
+  const [commentIdToDelete, setCommentIdToDelete] = useState<number | null>(null);
   const [content, setContent] = useState("");
 
   const deleteTask = async (id: string | undefined) => {
@@ -36,18 +38,27 @@ const Task = () => {
   }, [params.id]);
 
   const submitForm = async (e: FormEvent) => {
-      e.preventDefault();
-  
-      try {
-        await api.post("/comments", {
-          content,
-          taskId: Number(params.id)
-        });
-        location.reload();
-      } catch (error) {
-        console.error("Erro ao criar comentário:", error);
-      }
+    e.preventDefault();
+
+    try {
+      await api.post("/comments", {
+        content,
+        taskId: Number(params.id)
+      });
+      location.reload();
+    } catch (error) {
+      console.error("Erro ao criar comentário:", error);
     }
+  }
+
+  const deleteComment = async (id: number) => {
+    try {
+      await api.delete(`/comments/${id}`);
+      location.reload();
+    } catch (error) {
+      console.error("Erro ao deletar comentário:", error);
+    }
+  }
 
   return (
     <div className="task-container">
@@ -70,31 +81,69 @@ const Task = () => {
           <h3>Comentários ({task?.comments.length})</h3>
           <ul>
             {task?.comments.map(comment => (
-              <TaskComments
-                key={comment.id}
-                id={comment.id}
-                taskId={comment.taskId}
-                content={comment.content}
-                createdAt={comment.createdAt}
-              />
+              <div key={comment.id}>
+                <TaskComments
+                  id={comment.id}
+                  taskId={comment.taskId}
+                  content={comment.content}
+                  createdAt={comment.createdAt}
+                  deleteComment={() => {
+                    setCommentIdToDelete(comment.id);
+                    setIsModaldeleteCommentOpen(true);
+                  }}
+                />
+              </div>
             ))}
           </ul>
 
           <div className="task-options">
             <Link className="btn-confirm" to={`/edit-task/${params.id}`}>Editar tarefa</Link>
-            <button className="btn-cancel" onClick={() => setIsModalOpen(!isModalOpen)}>Deletar tarefa</button>
+            <button className="btn-cancel" onClick={() => setIsModaldeleteTaskOpen(!isModaldeleteTaskOpen)}>Deletar tarefa</button>
           </div>
         </main>
       </div>
       <ModalComponent
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
+        isOpen={isModaldeleteTaskOpen}
+        onRequestClose={() => setIsModaldeleteTaskOpen(false)}
         title="Confirmar exclusão"
       >
         <p>Deseja realmente excluir a tarefa <strong>{task?.title}</strong>?</p>
         <div className="modal-buttons">
           <button onClick={() => deleteTask(params.id)} className="btn-confirm">Sim, excluir</button>
-          <button onClick={() => setIsModalOpen(false)} className="btn-cancel">Cancelar</button>
+          <button onClick={() => setIsModaldeleteTaskOpen(false)} className="btn-cancel">Cancelar</button>
+        </div>
+      </ModalComponent>
+      <ModalComponent
+        isOpen={isModaldeleteCommentOpen}
+        onRequestClose={() => {
+          setIsModaldeleteCommentOpen(false);
+          setCommentIdToDelete(null);
+        }}
+        title="Confirmar exclusão"
+      >
+        <p>Deseja realmente excluir o comentário?</p>
+        <div className="modal-buttons">
+          <button
+            onClick={() => {
+              if (commentIdToDelete !== null) {
+                deleteComment(commentIdToDelete);
+                setIsModaldeleteCommentOpen(false);
+                setCommentIdToDelete(null);
+              }
+            }}
+            className="btn-confirm"
+          >
+            Sim, excluir
+          </button>
+          <button
+            onClick={() => {
+              setIsModaldeleteCommentOpen(false);
+              setCommentIdToDelete(null);
+            }}
+            className="btn-cancel"
+          >
+            Cancelar
+          </button>
         </div>
       </ModalComponent>
     </div>

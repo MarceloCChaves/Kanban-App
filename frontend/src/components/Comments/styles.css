@@ -6,3 +6,18 @@
   border: none;
   background: var(--light-gray);
 }
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-icons {
+  display: flex;
+  gap: .5rem;
+}
+
+.task-icon {
+  cursor: pointer;
+}
