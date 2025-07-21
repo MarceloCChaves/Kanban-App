@@ -23,3 +23,10 @@
   flex-direction: column;
   gap: .5rem;
 }
+
+.column-search {
+  border: none;
+  outline: none;
+  padding: .375rem .5rem;
+  border-radius: .5rem;
+}

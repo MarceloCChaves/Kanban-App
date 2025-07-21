@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { api } from "../../api/api";
 import type { IColumn } from "../../interfaces/IColumn";
 import TaskCard from "../TaskCard";
 import "./styles.css";
 
 const Column = ({ title, number_tasks, tasks }: IColumn) => {
+
+  const [findTask, setFindTask] = useState("");
 
   const deleteTask = async (id: number) => {
     try {
@@ -14,13 +17,25 @@ const Column = ({ title, number_tasks, tasks }: IColumn) => {
     }
   }
 
+  const filteredTasks = tasks.filter((task) =>
+    task.title.toLowerCase().includes(findTask.toLowerCase())
+  );
+
   return (
     <div className="column-container">
       <div className="column-content">
         <h2 className="column-title">
           {title} ({number_tasks})
         </h2>
-        {tasks.map((task) => (
+        {filteredTasks.length ?
+          <input
+            className="column-search"
+            type="text" placeholder="Procurar tarefa..."
+            value={findTask}
+            onChange={(e) => setFindTask(e.target.value)}
+          /> : <></>
+        }
+        {filteredTasks.map((task) => (
           <TaskCard
             key={task.id}
             id={task.id}
