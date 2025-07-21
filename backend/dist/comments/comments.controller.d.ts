@@ -7,20 +7,20 @@ export declare class CommentsController {
     create(createCommentDto: CreateCommentDto): Promise<{
         id: number;
         content: string;
-        taskId: number;
         createdAt: Date;
+        taskId: number;
     }>;
     findAll(): Promise<{
         id: number;
         content: string;
-        taskId: number;
         createdAt: Date;
+        taskId: number;
     }[]>;
     findOne(id: string): Promise<{
         id: number;
         content: string;
-        taskId: number;
         createdAt: Date;
+        taskId: number;
     }>;
     update(id: string, updateCommentDto: UpdateCommentDto): Promise<string>;
     remove(id: string): Promise<string>;

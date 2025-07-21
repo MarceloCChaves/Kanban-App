@@ -5,36 +5,36 @@ export declare class TasksController {
     private readonly tasksService;
     constructor(tasksService: TasksService);
     create(createTaskDto: CreateTaskDto): Promise<{
-        id: number;
         title: string;
         status: import(".prisma/client").$Enums.TaskStatus;
         description: string | null;
+        id: number;
     }>;
     findAll(): Promise<({
         comments: {
             id: number;
             content: string;
-            createdAt: Date;
             taskId: number;
+            createdAt: Date;
         }[];
     } & {
-        id: number;
         title: string;
         status: import(".prisma/client").$Enums.TaskStatus;
         description: string | null;
+        id: number;
     })[]>;
     findOne(id: string): Promise<{
         comments: {
             id: number;
             content: string;
-            createdAt: Date;
             taskId: number;
+            createdAt: Date;
         }[];
     } & {
-        id: number;
         title: string;
         status: import(".prisma/client").$Enums.TaskStatus;
         description: string | null;
+        id: number;
     }>;
     update(id: string, updateTaskDto: UpdateTaskDto): Promise<string>;
     remove(id: string): Promise<string>;
