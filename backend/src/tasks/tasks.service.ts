@@ -31,7 +31,7 @@ export class TasksService {
     });
 
     if(!findTask){
-      throw new NotFoundException("Carro não encontrado")
+      throw new NotFoundException("Tarefa não encontrada")
     }
 
     return findTask;

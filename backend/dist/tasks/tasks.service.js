@@ -37,7 +37,7 @@ let TasksService = class TasksService {
             }
         });
         if (!findTask) {
-            throw new common_1.NotFoundException("Carro não encontrado");
+            throw new common_1.NotFoundException("Tarefa não encontrada");
         }
         return findTask;
     }
