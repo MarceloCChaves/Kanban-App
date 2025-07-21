@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./styles.css";
 import { FaArrowCircleLeft } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import type { ITask } from "../../interfaces/ITask";
 import { api } from "../../api/api";
 import ModalComponent from "../../components/Modal";
@@ -12,6 +12,7 @@ const Task = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [content, setContent] = useState("");
 
   const deleteTask = async (id: string | undefined) => {
     try {
@@ -34,6 +35,20 @@ const Task = () => {
     getTask();
   }, [params.id]);
 
+  const submitForm = async (e: FormEvent) => {
+      e.preventDefault();
+  
+      try {
+        await api.post("/comments", {
+          content,
+          taskId: Number(params.id)
+        });
+        location.reload();
+      } catch (error) {
+        console.error("Erro ao criar comentário:", error);
+      }
+    }
+
   return (
     <div className="task-container">
       <div className="task-content">
@@ -47,22 +62,23 @@ const Task = () => {
             <div className="task-description">
               <p>{task?.description}</p>
             </div> : <></>}
+          <form className="task-publish" onSubmit={submitForm}>
+            <label htmlFor="input-comment">Publicar comentário</label>
+            <textarea className="task-publish-input" required rows={5} placeholder="Publicar comentário" id="input-comment" onChange={(e) => setContent(e.target.value)} />
+            <button className="task-publish-button">Publicar</button>
+          </form>
           <h3>Comentários ({task?.comments.length})</h3>
-          {task?.comments && task.comments.length > 0 ? (
-            <ul>
-              {task.comments.map(comment => (
-                <TaskComments
-                  key={comment.id}
-                  id={comment.id}
-                  taskId={comment.taskId}
-                  content={comment.content}
-                  createdAt={comment.createdAt}
-                />
-              ))}
-            </ul>
-          ) : (
-            <p><i>Sem comentários</i></p>
-          )}
+          <ul>
+            {task?.comments.map(comment => (
+              <TaskComments
+                key={comment.id}
+                id={comment.id}
+                taskId={comment.taskId}
+                content={comment.content}
+                createdAt={comment.createdAt}
+              />
+            ))}
+          </ul>
 
           <div className="task-options">
             <Link className="btn-confirm" to={`/edit-task/${params.id}`}>Editar tarefa</Link>

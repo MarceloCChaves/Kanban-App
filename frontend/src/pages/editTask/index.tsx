@@ -36,7 +36,7 @@ const EditTask = () => {
         status,
         description,
       });
-      navigate("/");
+      navigate(`/task/${params.id}`);
     } catch (error) {
       console.error("Erro ao atualizar tarefa:", error);
     }
