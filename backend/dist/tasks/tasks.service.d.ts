@@ -5,22 +5,22 @@ export declare class TasksService {
     private readonly prisma;
     constructor(prisma: PrismaService);
     create(createTaskDto: CreateTaskDto): Promise<{
+        id: number;
         title: string;
         status: import(".prisma/client").$Enums.TaskStatus;
         description: string | null;
-        id: number;
     }>;
     findAll(): Promise<{
+        id: number;
         title: string;
         status: import(".prisma/client").$Enums.TaskStatus;
         description: string | null;
-        id: number;
     }[]>;
     findOne(id: number): Promise<{
+        id: number;
         title: string;
         status: import(".prisma/client").$Enums.TaskStatus;
         description: string | null;
-        id: number;
     }>;
     update(id: number, updateTaskDto: UpdateTaskDto): Promise<string>;
     remove(id: number): Promise<string>;

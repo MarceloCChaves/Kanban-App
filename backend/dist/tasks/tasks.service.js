@@ -21,6 +21,7 @@ let TasksService = class TasksService {
         const newTask = {
             title: createTaskDto.title,
             status: createTaskDto.status,
+            description: createTaskDto.description
         };
         return await this.prisma.task.create({
             data: newTask,
