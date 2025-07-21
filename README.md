@@ -89,6 +89,9 @@ npm run dev
 
 Pronto, agora tudo está configurado e pronto para uso
 
+## Aplicação do uso da IA
+Para isso, produzi um documento contendo todo o meu uso de IA na aplicação, pode ser conferido por meio do <a href="https://docs.google.com/document/d/1LlYdxUv49ZU_9Iw0md4jMZcB_vFw7SdMHneNAgaoi9I/edit?usp=sharing">Link</a>
+
 ## Autor
 
 <a href="https://github.com/MarceloCChaves">
