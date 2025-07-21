@@ -1,7 +1,22 @@
-.home-container {
+.home-title {
   display: flex;
+  align-items: center;
   justify-content: space-around;
+  margin: 1rem 0;
+}
+
+.home-button {
+  background: var(--blue);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border-radius: .5rem;
+}
+
+.home-content {
+  display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   align-items: flex-start;
-  margin-top: 20px;
+  margin: 1.25rem;
+  gap: .5rem;
 }

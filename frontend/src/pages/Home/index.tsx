@@ -3,6 +3,7 @@ import { api } from "../../api/api";
 import "./styles.css";
 import { useEffect, useState } from "react";
 import type { ITasks } from "../../interfaces/ITasks";
+import { Link } from "react-router-dom";
 
 const Home = () => {
 
@@ -28,10 +29,21 @@ const Home = () => {
 
   return (
     <section className="home-container">
-      <Column title="A Fazer" number_tasks={tasksByStatus.pending.length} tasks={tasksByStatus.pending} />
-      <Column title="Em Progresso" number_tasks={tasksByStatus.in_progress.length} tasks={tasksByStatus.in_progress} />
-      <Column title="Testando" number_tasks={tasksByStatus.testing.length} tasks={tasksByStatus.testing} />
-      <Column title="Concluído" number_tasks={tasksByStatus.done.length} tasks={tasksByStatus.done} />
+      <div className="home-title">
+        <div>
+          <h2>Número de tasks: {tasks.length}</h2>
+          <p>Clique em uma tarefa para visualiza-la</p>
+        </div>
+        <div>
+          <Link className="home-button" to="/create-task">+ Nova tarefa</Link>
+        </div>
+      </div>
+      <div className="home-content">
+        <Column title="A Fazer" number_tasks={tasksByStatus.pending.length} tasks={tasksByStatus.pending} />
+        <Column title="Em Progresso" number_tasks={tasksByStatus.in_progress.length} tasks={tasksByStatus.in_progress} />
+        <Column title="Testando" number_tasks={tasksByStatus.testing.length} tasks={tasksByStatus.testing} />
+        <Column title="Concluído" number_tasks={tasksByStatus.done.length} tasks={tasksByStatus.done} />
+      </div>
     </section>
   )
 }

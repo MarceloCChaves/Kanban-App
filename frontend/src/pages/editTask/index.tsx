@@ -46,7 +46,7 @@ const EditTask = () => {
     <form className="form-container" onSubmit={submitForm}>
       <div className="form-content">
         <header className="form-header">
-          <h3 className="form-title">Cadastrar nova tarefa</h3>
+          <h3 className="form-title">Editar tarefa</h3>
           <Link className="form-back" to="/">Voltar <FaArrowCircleLeft /></Link>
         </header>
         <main className="form-main">

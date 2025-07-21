@@ -6,12 +6,12 @@ const Header = () => {
   return(
     <header className="header-container">
       <div className="header-content">
-        <div className="header-logo">
+        <div className="header-title">
+          <h2>Kanban App</h2>
+        </div>
+        <Link className="header-logo" to="/">
           <img src={Logo} alt="React-logo" />
-        </div>
-        <div className="header-button">
-           <Link to="/create-task">+ Nova tarefa</Link>
-        </div>
+        </Link>
       </div>
     </header>
   )

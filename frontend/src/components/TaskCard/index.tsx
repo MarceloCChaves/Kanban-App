@@ -1,12 +1,8 @@
-import { useState } from "react";
 import type { ITasks } from "../../interfaces/ITasks";
 import "./styles.css";
-import { FaEye, FaPencilAlt, FaTrash } from "react-icons/fa";
-import ModalComponent from "../Modal";
 import { Link } from "react-router-dom";
 
-const TaskCard = ({ id, title, status, deleteTask }: ITasks) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const TaskCard = ({ id, title, status }: ITasks) => {
 
   const classNameStatus = {
     pending: "card-pending",
@@ -15,42 +11,14 @@ const TaskCard = ({ id, title, status, deleteTask }: ITasks) => {
     done: "card-done",
   };
 
-  const handleDelete = () => {
-    deleteTask(id);
-    setIsModalOpen(false);
-  };
-
   return (
     <>
-      <div className="task-card">
+      <Link className="task-card" to={`/task/${id}`}>
         <div className="card-info">
           <h3 className="card-title">{title}</h3>
           <p className={`card-status ${classNameStatus[status]}`}>{status}</p>
-          <div className="card-options">
-            <Link to={`/task/${id}`}>
-              <FaEye size={15} color="##438ac9" />
-            </Link>
-            <Link to={`/edit-task/${id}`}>
-              <FaPencilAlt size={15} color="#2D4F2B" />
-            </Link>
-            <button className="card-button" onClick={() => setIsModalOpen(true)}>
-              <FaTrash size={15} color="#E14434" />
-            </button>
-          </div>
         </div>
-      </div>
-
-      <ModalComponent
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
-        title="Confirmar exclusão"
-      >
-        <p>Deseja realmente excluir a tarefa <strong>{title}</strong>?</p>
-        <div className="modal-buttons">
-          <button onClick={handleDelete} className="btn-confirm">Sim, excluir</button>
-          <button onClick={() => setIsModalOpen(false)} className="btn-cancel">Cancelar</button>
-        </div>
-      </ModalComponent>
+      </Link>
     </>
   );
 };

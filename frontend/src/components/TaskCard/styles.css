@@ -21,15 +21,6 @@
   font-weight: 700;
 }
 
-.card-options {
-  margin-top: 1rem;
-}
-
-.card-button {
-  padding: .5rem;
-  background: inherit;
-}
-
 .card-pending {
   background: var(--light-red);
   color: var(--red);

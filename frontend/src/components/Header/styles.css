@@ -3,15 +3,14 @@
   padding: 1.25rem;
 }
 
+.header-title h2 {
+  color: var(--white);
+  text-transform: uppercase;
+  font-style: italic;
+}
+
 .header-content{
   display: flex;
   align-items: center;
   justify-content: space-around;
-}
-
-.header-button a {
-  background: var(--blue);
-  color: var(--white);
-  padding: 0.5rem 1rem;
-  border-radius: .5rem;
 }
