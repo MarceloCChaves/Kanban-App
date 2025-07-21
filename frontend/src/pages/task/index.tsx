@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import type { ITask } from "../../interfaces/ITask";
 import { api } from "../../api/api";
 import ModalComponent from "../../components/Modal";
+import TaskComments from "../../components/Comments";
 
 const Task = () => {
   const [task, setTask] = useState<ITask | null>(null);
@@ -42,10 +43,27 @@ const Task = () => {
         </header>
         <main className="task-main">
           <p>Status: {task?.status}</p>
-          {task?.description ? 
-          <div className="task-description">
-            <p>{task?.description}</p>
-          </div> : <></>}
+          {task?.description ?
+            <div className="task-description">
+              <p>{task?.description}</p>
+            </div> : <></>}
+          <h3>Comentários ({task?.comments.length})</h3>
+          {task?.comments && task.comments.length > 0 ? (
+            <ul>
+              {task.comments.map(comment => (
+                <TaskComments
+                  key={comment.id}
+                  id={comment.id}
+                  taskId={comment.taskId}
+                  content={comment.content}
+                  createdAt={comment.createdAt}
+                />
+              ))}
+            </ul>
+          ) : (
+            <p><i>Sem comentários</i></p>
+          )}
+
           <div className="task-options">
             <Link className="btn-confirm" to={`/edit-task/${params.id}`}>Editar tarefa</Link>
             <button className="btn-cancel" onClick={() => setIsModalOpen(!isModalOpen)}>Deletar tarefa</button>

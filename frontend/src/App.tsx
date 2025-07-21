@@ -5,8 +5,10 @@ import CreateTask from './pages/createTask';
 import EditTask from './pages/editTask';
 import Header from './components/Header';
 import Modal from 'react-modal';
+import moment from 'moment';
 
 Modal.setAppElement('#root');
+moment.locale("pt-br");
 
 const App = () => {
   return (
