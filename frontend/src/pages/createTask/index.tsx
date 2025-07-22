@@ -1,8 +1,13 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./styles.css";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { useState, type FormEvent } from "react";
 import { api } from "../../api/api";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
+import Textarea from "../../components/Textarea";
+import Select from "../../components/Select";
+import AnchorButton from "../../components/AnchorButton";
 
 const CreateTask = () => {
   const navigate = useNavigate();
@@ -30,29 +35,58 @@ const CreateTask = () => {
       <div className="form-content">
         <header className="form-header">
           <h3 className="form-title">Cadastrar nova tarefa</h3>
-          <Link className="form-back" to="/">Voltar <FaArrowCircleLeft /></Link>
+          <AnchorButton classname="form-back" to="/">
+            Voltar
+            <FaArrowCircleLeft />
+          </AnchorButton>
         </header>
         <main className="form-main">
           <div className="form-task">
             <label className="">Título<span className="form-required">*</span></label>
-            <input className="form-input" type="text" placeholder="Digite o título da tarefa" required onChange={(e) => setTitle(e.target.value)} />
+            <Input
+              classname="form-input"
+              type="text"
+              value={title}
+              required
+              placeholder="Digite o título da tarefa"
+              onchange={(e) => setTitle(e.target.value)}
+            />
           </div>
           <div className="form-task">
             <label className="">Status<span className="form-required">*</span></label>
-            <select className="form-select" value={status} required onChange={(e) => setStatus(e.target.value)}>
+            <Select
+              classname="form-select"
+              value={status}
+              required
+              onchange={(e) => setStatus(e.target.value)}
+            >
               <option value="pending">A Fazer</option>
               <option value="in_progress">Em Progresso</option>
               <option value="testing">Testando</option>
               <option value="done">Concluído</option>
-            </select>
+            </Select>
           </div>
           <div className="form-task">
             <label>Descrição</label>
-            <textarea className="form-input" rows={7} placeholder="Digite o título da tarefa" onChange={(e) => setDescription(e.target.value)} />
+            <Textarea
+              classname="form-input"
+              rows={7}
+              placeholder="Digite o título da tarefa"
+              onchange={(e) => setDescription(e.target.value)}
+            />
           </div>
           <div className="form-actions">
-            <button className="form-create" type="submit">Criar tarefa</button>
-            <button className="form-cancel" type="button" onClick={() => navigate("/")} >Cancelar</button>
+            <Button
+              classname="form-create"
+              type="submit"
+              text="Criar tarefa"
+            />
+            <Button
+              classname="form-cancel"
+              type="button"
+              text="Cancelar"
+              onclick={() => navigate("/")}
+            />
           </div>
         </main>
       </div>

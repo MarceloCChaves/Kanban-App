@@ -1,6 +1,6 @@
 import type { ITasks } from "../../interfaces/ITasks";
+import AnchorButton from "../AnchorButton";
 import "./styles.css";
-import { Link } from "react-router-dom";
 
 const TaskCard = ({ id, title, status }: ITasks) => {
 
@@ -13,12 +13,15 @@ const TaskCard = ({ id, title, status }: ITasks) => {
 
   return (
     <>
-      <Link className="task-card" to={`/task/${id}`}>
+      <AnchorButton
+        classname="task-card" 
+        to={`/task/${id}`}
+      >
         <div className="card-info">
           <h3 className="card-title">{title}</h3>
           <p className={`card-status ${classNameStatus[status]}`}>{status}</p>
         </div>
-      </Link>
+      </AnchorButton>
     </>
   );
 };

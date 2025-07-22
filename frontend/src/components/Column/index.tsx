@@ -3,6 +3,7 @@ import { api } from "../../api/api";
 import type { IColumn } from "../../interfaces/IColumn";
 import TaskCard from "../TaskCard";
 import "./styles.css";
+import Input from "../Input";
 
 const Column = ({ title, number_tasks, tasks }: IColumn) => {
 
@@ -27,13 +28,15 @@ const Column = ({ title, number_tasks, tasks }: IColumn) => {
         <h2 className="column-title">
           {title} ({number_tasks})
         </h2>
-        {filteredTasks.length ?
-          <input
-            className="column-search"
-            type="text" placeholder="Procurar tarefa..."
+        {tasks.length ?
+          <Input
+            classname="column-search"
+            type="text"
+            placeholder="Procurar tarefa..."
             value={findTask}
-            onChange={(e) => setFindTask(e.target.value)}
-          /> : <></>
+            onchange={(e) => setFindTask(e.target.value)}
+          /> :
+          <></>
         }
         {filteredTasks.map((task) => (
           <TaskCard

@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./styles.css";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { useEffect, useState, type FormEvent } from "react";
@@ -6,6 +6,9 @@ import type { ITask } from "../../interfaces/ITask";
 import { api } from "../../api/api";
 import ModalComponent from "../../components/Modal";
 import TaskComments from "../../components/Comments";
+import Button from "../../components/Button";
+import Textarea from "../../components/Textarea";
+import AnchorButton from "../../components/AnchorButton";
 
 const Task = () => {
   const [task, setTask] = useState<ITask | null>(null);
@@ -65,7 +68,12 @@ const Task = () => {
       <div className="task-content">
         <header className="task-header">
           <h3 className="task-title">{task?.title}</h3>
-          <Link className="task-back" to="/">Voltar <FaArrowCircleLeft /></Link>
+          <AnchorButton
+            to="/"
+            classname="task-back"
+          >
+            Voltar <FaArrowCircleLeft />
+          </AnchorButton>
         </header>
         <main className="task-main">
           <p>Status: {task?.status}</p>
@@ -75,8 +83,19 @@ const Task = () => {
             </div> : <></>}
           <form className="task-publish" onSubmit={submitForm}>
             <label htmlFor="input-comment">Publicar comentário</label>
-            <textarea className="task-publish-input" required rows={5} placeholder="Publicar comentário" id="input-comment" onChange={(e) => setContent(e.target.value)} />
-            <button className="task-publish-button">Publicar</button>
+            <Textarea
+              classname="task-publish-input"
+              rows={5}
+              required
+              id="input-comment"
+              placeholder="Publicar comentário"
+              onchange={(e) => setContent(e.target.value)}
+            />
+            <Button
+              classname="task-publish-button"
+              text="Publicar"
+              type="submit"
+            />
           </form>
           <h3>Comentários ({task?.comments.length})</h3>
           <ul>
@@ -97,8 +116,18 @@ const Task = () => {
           </ul>
 
           <div className="task-options">
-            <Link className="btn-confirm" to={`/edit-task/${params.id}`}>Editar tarefa</Link>
-            <button className="btn-cancel" onClick={() => setIsModaldeleteTaskOpen(!isModaldeleteTaskOpen)}>Deletar tarefa</button>
+            <AnchorButton
+              classname="btn-confirm"
+              to={`/edit-task/${params.id}`}
+            >
+              Editar tarefa
+            </AnchorButton>
+            <Button
+              classname="btn-cancel"
+              type="button"
+              text="Deletar tarefa"
+              onclick={() => setIsModaldeleteTaskOpen(!isModaldeleteTaskOpen)}
+            />
           </div>
         </main>
       </div>
@@ -109,8 +138,18 @@ const Task = () => {
       >
         <p>Deseja realmente excluir a tarefa <strong>{task?.title}</strong>?</p>
         <div className="modal-buttons">
-          <button onClick={() => deleteTask(params.id)} className="btn-confirm">Sim, excluir</button>
-          <button onClick={() => setIsModaldeleteTaskOpen(false)} className="btn-cancel">Cancelar</button>
+          <Button
+            classname="btn-confirm"
+            type="button"
+            text="Sim, excluir"
+            onclick={() => deleteTask(params.id)}
+          />
+          <Button
+            classname="btn-cancel"
+            type="button"
+            text="Cancelar"
+            onclick={() => setIsModaldeleteTaskOpen(false)}
+          />
         </div>
       </ModalComponent>
       <ModalComponent
@@ -123,27 +162,27 @@ const Task = () => {
       >
         <p>Deseja realmente excluir o comentário?</p>
         <div className="modal-buttons">
-          <button
-            onClick={() => {
+          <Button
+            onclick={() => {
               if (commentIdToDelete !== null) {
                 deleteComment(commentIdToDelete);
                 setIsModaldeleteCommentOpen(false);
                 setCommentIdToDelete(null);
               }
             }}
-            className="btn-confirm"
-          >
-            Sim, excluir
-          </button>
-          <button
-            onClick={() => {
+            classname="btn-confirm"
+            text="Sim, excluir"
+            type="button"
+          />
+          <Button
+            onclick={() => {
               setIsModaldeleteCommentOpen(false);
               setCommentIdToDelete(null);
             }}
-            className="btn-cancel"
-          >
-            Cancelar
-          </button>
+            classname="btn-cancel"
+            text="Cancelar"
+            type="button"
+          />
         </div>
       </ModalComponent>
     </div>

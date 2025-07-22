@@ -3,7 +3,7 @@ import { api } from "../../api/api";
 import "./styles.css";
 import { useEffect, useState } from "react";
 import type { ITasks } from "../../interfaces/ITasks";
-import { Link } from "react-router-dom";
+import AnchorButton from "../../components/AnchorButton";
 
 const Home = () => {
 
@@ -35,7 +35,12 @@ const Home = () => {
           <p>Clique em uma tarefa para visualiza-la</p>
         </div>
         <div>
-          <Link className="home-button" to="/create-task">+ Nova tarefa</Link>
+          <AnchorButton
+            classname="home-button"
+            to="/create-task"
+          >
+            + Nova tarefa
+          </AnchorButton>
         </div>
       </div>
       <div className="home-content">
