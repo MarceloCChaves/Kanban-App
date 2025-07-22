@@ -13,6 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Tabela Tarefas
 model Task {
   id     Int        @id @default(autoincrement())
   title  String
@@ -23,6 +24,7 @@ model Task {
   @@map("tasks")
 }
 
+// Tabela comentários
 model Comment {
   id        Int      @id @default(autoincrement())
   content   String
@@ -33,6 +35,7 @@ model Comment {
   @@map("comments")
 }
 
+// Tipos de status de uma tarefa
 enum TaskStatus {
   pending
   in_progress

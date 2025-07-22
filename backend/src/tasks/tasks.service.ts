@@ -7,6 +7,7 @@ import { PrismaService } from 'src/database/prisma.service';
 export class TasksService {
   constructor(private readonly prisma: PrismaService){}
 
+  // Criar tarefa, recebendo title, status e description e detornando um objeto contendo essas informações
   async create(createTaskDto: CreateTaskDto) {
     const newTask = {
       title: createTaskDto.title,
@@ -19,12 +20,14 @@ export class TasksService {
     })
   }
 
+  // Buscar todas as tarefas
   async findAll() {
     return await this.prisma.task.findMany({
       include: { comments: true },
     });
   }
-
+    
+  // Buscar uma única tarefa pelo id, retornando os comentários da mesma
   async findOne(id: number) {
     const findTask = await this.prisma.task.findFirst({
       where: {
@@ -40,6 +43,7 @@ export class TasksService {
     return findTask;
   }
 
+  // Atualizar tarefa pelo Id
   async update(id: number, updateTaskDto: UpdateTaskDto) {
     await this.findOne(id);
 
@@ -53,6 +57,7 @@ export class TasksService {
     return `Task ${id} has updated successfully`;
   }
 
+  // Remover tarefa pelo Id
   async remove(id: number) {
     await this.findOne(id);
 

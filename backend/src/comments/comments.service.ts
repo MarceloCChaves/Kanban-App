@@ -6,6 +6,8 @@ import { PrismaService } from 'src/database/prisma.service';
 @Injectable()
 export class CommentsService {
   constructor(private readonly prisma: PrismaService){}
+
+  // Criar comentário, associando com uma tarefa, retornando o content e o id da tarefa a qual esse comentário está associado 
   async create(createCommentDto: CreateCommentDto) {
     const task = await this.prisma.task.findUnique({
       where: { id: createCommentDto.taskId },
@@ -25,12 +27,14 @@ export class CommentsService {
     });
   }
 
+  // Buscar todas os comentários pela ordem decrescente
   async findAll() {
     return await this.prisma.comment.findMany({
       orderBy: { createdAt: 'desc' },
     });
   }
 
+  // Buscar um único comentário
   async findOne(id: number) {
     const comment = await this.prisma.comment.findUnique({
       where: { id },
@@ -43,6 +47,7 @@ export class CommentsService {
     return comment;
   }
 
+  // Atualizar tarefa, a partir de seu ID
   async update(id: number, updateCommentDto: UpdateCommentDto) {
     await this.findOne(id);
 
@@ -54,6 +59,7 @@ export class CommentsService {
     return `Comentário ${id} atualizado com sucesso`;
   }
 
+   // Remover tarefa, a partir de seu ID
   async remove(id: number) {
     await this.findOne(id);
 
